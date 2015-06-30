@@ -6,20 +6,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.anaguchijunya.domain.Customer;
-import com.anaguchijunya.repository.CustomerRepositoryOld;
+import com.anaguchijunya.repository.CustomerRepository;
 
 @Service
 public class CustomerService {
 
 	@Autowired
-	CustomerRepositoryOld repository;
-
-	public Customer save(Customer customer) {
-		return repository.save(customer);
-	}
-
+	CustomerRepository customerRepository;
+	
 	public List<Customer> findAll() {
-		return repository.findAll();
+		return customerRepository.findAll();
+	}
+	
+	public Customer findOne(Integer id) {
+		return customerRepository.findOne(id);
+	}
+	
+	public Customer create(Customer customer) {
+		return customerRepository.save(customer);
+	}
+	
+	public Customer update(Customer customer) {
+		return customerRepository.save(customer);
+	}
+	
+	public void delete(Integer id) {
+		customerRepository.delete(id);
 	}
 
 }
