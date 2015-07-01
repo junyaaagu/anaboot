@@ -85,6 +85,17 @@ public class CustomerController {
 	}
 	
 	/**
+	 * 顧客情報を１件削除する
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	String delete(@RequestParam Integer id) {
+		customerService.delete(id);
+		return "redirect:/customers";
+	}
+	
+	/**
 	 * Topへ戻る
 	 * @return
 	 */
