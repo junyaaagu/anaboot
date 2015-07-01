@@ -1,26 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!-- thymeleafの名前空間を使用する -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
 <head>
-<meta charset="UTF-8" />
 	<title>顧客情報編集</title>
-<!-- 
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
-	th:href="@{/webjars/bootstrap/3.2.0/bootstrap.min.css}" />
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"
-	th:href="@{/webjars/bootstrap/3.2.0/bootstrap-theme.min.css}" />
- -->
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
-	th:href="@{http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css}" />
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"
-	th:href="@{http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css}" />
-	<link rel="stylesheet" type="text/css" 
-	      href="../../static/css/style.css"
-	      th:href="@{/css/style.css}" />
 </head>
 <body>
-<div class="container">
-	<h1>顧客管理システム</h1>
-	<div class="col-sm-12">
+	<div layout:fragment="content" class="col-sm-12">
 		<form th:action="@{/customers/edit}" th:object="${customerForm}" class="form-horizontal" method="post" >
 			<fieldset>
 				<legend>顧客情報編集</legend>
@@ -48,7 +35,6 @@
 			</fieldset>
 		</form>	
 	</div>
-</div>
 <!-- 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
  th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
