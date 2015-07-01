@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.anaguchijunya.domain.Customer;
 import com.anaguchijunya.service.CustomerService;
@@ -49,4 +50,46 @@ public class CustomerController {
 		return "redirect:/customers";
 	}
 	
+	/**
+	 * 編集ボタン押下時の処理
+	 * @param id
+	 * @param form
+	 * @return
+	 */
+	@RequestMapping(value = "edit", params = "form", method = RequestMethod.GET)
+	String editForm(@RequestParam Integer id, CustomerForm form) {
+		Customer customer = customerService.findOne(id);
+		BeanUtils.copyProperties(customer, form);
+		return "customers/edit";
+	}
+	
+	/**
+	 * 顧客の更新処理
+	 * @param id
+	 * @param form
+	 * @param result
+	 * @return
+	 */
+	@RequestMapping(value = "edit", method = RequestMethod.POST)
+	String edit(@RequestParam Integer id, @Validated CustomerForm form, BindingResult result) {
+		// 入力エラーがある場合は編集画面に戻る
+		if (result.hasErrors()) {
+			return editForm(id, form);
+		}
+		
+		Customer customer = new Customer();
+		BeanUtils.copyProperties(form, customer);
+		customer.setId(id);
+		customerService.update(customer);
+		return "redirect:/customers";
+	}
+	
+	/**
+	 * Topへ戻る
+	 * @return
+	 */
+	@RequestMapping(value = "edit", params = "goToTop")
+	String goToTop() {
+		return "redirect:/customers";
+	}
 }
