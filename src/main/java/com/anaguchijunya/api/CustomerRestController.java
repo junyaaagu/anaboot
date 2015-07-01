@@ -4,9 +4,11 @@
 package com.anaguchijunya.api;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,12 +35,12 @@ public class CustomerRestController {
 	CustomerService customerService;
 	
 	/**
-	 * 顧客を全件取得する
+	 * ページ数と１ページあたりの件数を指定して顧客を全件取得する
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	List<Customer> getCustomers() {
-		List<Customer> customers = customerService.findAll();
+	Page<Customer> getCustomers(@PageableDefault Pageable pageable) {
+		Page<Customer> customers = customerService.findAll(pageable);
 		return customers;
 	}
 	
