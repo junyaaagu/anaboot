@@ -10,6 +10,7 @@ spring:
     username: sa
     password:
   jpa:
+    database: H2
     hibernate.ddl-auto: validate
   thymeleaf:
     cache: false
