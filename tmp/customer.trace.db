@@ -1,0 +1,11 @@
+07-02 13:53:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: SQLステートメントに文法エラーがあります "INSERT INTO USERS ('user1'[*], '$2a$10$ONZv3tBrdCwKbeuN75pUuuG0oIH46Vyc6io2nsaeNh5SFtgSLvSCe') "; 期待されるステートメント "identifier"
+Syntax error in SQL statement "INSERT INTO USERS ('user1'[*], '$2a$10$ONZv3tBrdCwKbeuN75pUuuG0oIH46Vyc6io2nsaeNh5SFtgSLvSCe') "; expected "identifier"; SQL statement:
+INSERT INTO users ('user1', '$2a$10$ONZv3tBrdCwKbeuN75pUuuG0oIH46Vyc6io2nsaeNh5SFtgSLvSCe') [42001-185]
+07-02 14:16:32 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: テーブル "USERS" はすでに存在します
+Table "USERS" already exists; SQL statement:
+CREATE TABLE users (
+  username VARCHAR(100) NOT NULL PRIMARY KEY,
+  encoded_password VARCHAR(255) 
+) [42101-185]
