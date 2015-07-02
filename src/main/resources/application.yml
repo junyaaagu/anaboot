@@ -1,4 +1,9 @@
 spring:
+  profiles:
+    active: dev
+---
+spring:
+  profiles: dev
   datasource:
     driverClassName: org.h2.Driver
     url: jdbc:h2:file:./tmp/customer
@@ -8,4 +13,16 @@ spring:
     hibernate.ddl-auto: validate
   thymeleaf:
     cache: false
+---
+spring:
+  profiles: heroku
+  dataSource: 
+    driverClassName: org.postgresql.Driver
+  jpa:
+    database: POSTGRESQL
+    hibernate: 
+      ddl-auto: create-drop
+  thymeleaf:
+    cache: false
+
 security.basic.enabled: false

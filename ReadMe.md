@@ -11,5 +11,6 @@ spring-boot tips
   git init
   git add -A
   git commit -m "FIrst Commit" -a
+  heroku create
   git push heroku master
-  
+  - herokuではpostgresSQL

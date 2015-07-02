@@ -1,5 +1,8 @@
 package com.anaguchijunya;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javax.sql.DataSource;
 
 import net.sf.log4jdbc.Log4jdbcProxyDataSource;
@@ -25,12 +28,34 @@ public class AppConfig {
 	DataSource dataSource;
 
 	@Bean(destroyMethod = "close")
-	DataSource realDataSource() {
+	DataSource realDataSource() throws URISyntaxException {
+		String url;
+		String username;
+		String password;
+		
+		String databaseUrl = System.getenv("DATABASE_URL");
+		if (databaseUrl != null) {
+			URI dburi = new URI(databaseUrl);
+			url = new StringBuilder("jdbc:postgresql://")
+				.append(dburi.getHost())
+				.append(dburi.getPath())
+				.append(":")
+				.append(dburi.getPort())
+				.append(dburi.getPath())
+				.toString();
+			username = dburi.getUserInfo().split(":")[0];
+			password = dburi.getUserInfo().split(":")[1];
+		} else {
+			url = this.dataSourceProperties.getUrl();
+			username = this.dataSourceProperties.getUsername();
+			password = this.dataSourceProperties.getPassword();
+		}
+		
 		DataSourceBuilder factory =  DataSourceBuilder
 				.create(this.dataSourceProperties.getClassLoader())
-				.url(this.dataSourceProperties.getUrl())
-				.username(this.dataSourceProperties.getUsername())
-				.password(this.dataSourceProperties.getPassword());
+				.url(url)
+				.username(username)
+				.password(password);
 		this.dataSource = factory.build();
 		return this.dataSource;
 	}
