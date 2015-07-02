@@ -38,6 +38,7 @@
 				<th>ID</th>
 				<th>姓</th>
 				<th>名</th>
+				<th>担当者</th>
 				<th colspan="2">編集</th>
 			</tr>
 			<!-- variable : List という記法でforeach -->
@@ -45,6 +46,7 @@
 				<td th:text="${customer.id}">100</td>
 				<td th:text="${customer.firstName}">山田</td>
 				<td th:text="${customer.lastName}">太郎</td>
+				<td th:text="${customer.user.username}">duke</td>
 				<td>
 					<!-- @{path}の記法で相対パスを絶対パスに置換できる -->
 					<form th:action="@{/customers/edit}" method="get" >

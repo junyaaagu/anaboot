@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.anaguchijunya.domain.Customer;
+import com.anaguchijunya.domain.User;
 import com.anaguchijunya.repository.CustomerRepository;
 
 @Service
@@ -32,7 +33,17 @@ public class CustomerService {
 		return customerRepository.save(customer);
 	}
 	
+	public Customer create(Customer customer, User user) {
+		customer.setUser(user);
+		return customerRepository.save(customer);
+	}
+	
 	public Customer update(Customer customer) {
+		return customerRepository.save(customer);
+	}
+	
+	public Customer update(Customer customer, User user) {
+		customer.setUser(user);
 		return customerRepository.save(customer);
 	}
 	
